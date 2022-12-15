@@ -1,0 +1,48 @@
+Grafana 
+
+1. role associations
+2. automaticaly map dashboard 3119 
+3.Prometheus migrate to Fargate --> need predefined storage colume 
+4. integrate cicd with argocd using webhook
+
+
+
+
+Terraform application for EKS cluster creation + add ons for dns, networking etc  --> done
+CI CD pipeline to containerize a java application and push to docker / ECR --> done
+Prometheus and Grafana for Observability --> done
+Git OPs / ArgoCD pipeline for kubernetes deployment --> done 
+TCO --> pending
+
+
+
+---Important commands
+
+generate grafana api keys 
+
+aws grafana create-workspace-api-key --key-name "adot" --key-role "ADMIN" --seconds-to-live 864000 --workspace-id "g-af97f4fce9"
+
+
+---ENabling ADOT 
+
+https://github.com/aws-observability/aws-otel-collector/blob/main/docs/developers/eks-demo.md
+https://github.com/aws-observability/aws-otel-collector/blob/main/docs/developers/eks-demo.md
+
+
+---ENABLING CLOUDWATCH AGENT 
+
+https://www.eksworkshop.com/advanced/330_servicemesh_using_appmesh/add_nodegroup_fargate/cloudwatch_setup/
+
+
+curl -s https://raw.githubusercontent.com/aws-samples/amazon-cloudwatch-container-insights/latest/k8s-deployment-manifest-templates/deployment-mode/daemonset/container-insights-monitoring/quickstart/cwagent-fluentd-quickstart.yaml | sed "s/{{cluster_name}}/octank-v9/;s/{{region_name}}/us-east-1/" | kubectl apply -f -    
+
+
+--DEPLOY METRIC SERVER / container insights using prometheus 
+
+https://www.datadoghq.com/blog/tools-for-collecting-aws-fargate-metrics/#collecting-metrics-from-eks-on-fargate
+
+https://docs.aws.amazon.com/eks/latest/userguide/metrics-server.html
+
+kubectl apply -f https://github.com/kubernetes-sigs/metrics-server/releases/latest/download/components.yaml
+kubectl get deployment metrics-server -n kube-system
+

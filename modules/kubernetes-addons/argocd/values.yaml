@@ -1,0 +1,35 @@
+
+
+redis-ha:
+  enabled: true
+
+controller:
+  enableStatefulSet: true
+
+server:
+  autoscaling:
+    enabled: true
+    minReplicas: 2
+  # VD: added ingress true flag
+  ingress:  
+    enabled: true
+    ingressClassName: alb
+    rules:
+      - http:
+          paths:
+            - path: /
+              pathType: Prefix
+              backend:
+                service: 
+                  name: argo-cd-argocd-server
+                  port:
+                    number: 80
+repoServer:
+  autoscaling:
+    enabled: true
+    minReplicas: 2
+
+configs:
+  cm:
+    #use annotation for tracking but keep labels for compatibility with other tools
+    application.resourceTrackingMethod: annotation+label
