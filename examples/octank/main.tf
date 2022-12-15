@@ -377,8 +377,8 @@ resource "aws_secretsmanager_secret_version" "arogcd" {
 module "adot-amp-grafana-for-java" {
   source = "../observability/adot-amp-grafana-for-java_vik"
   
-  grafana_endpoint ="https://g-af97f4fce9.grafana-workspace.us-east-1.amazonaws.com/?orgId=1"
-  grafana_api_key      = "eyJrIjoiQ3hNdU5jVFlvdjQwc1lUU0NkeEQ5RFY3aXJ0WDFCWlMiLCJuIjoiYWRvdCIsImlkIjoxfQ=="
+  grafana_endpoint =""
+  grafana_api_key      = ""
   aws_region = local.region
 
   
